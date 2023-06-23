@@ -1,0 +1,64 @@
+mkdir tools
+
+#SRA toolkit
+sudo apt update
+sudo apt install sra-toolkit
+fastq-dump --version
+
+
+#download fastqc
+## Install & unzip
+#if wget won't work, try curl 
+wget https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.12.1.zip
+unzip fastqc_v0.12.1.zip
+## Write at the end of the .bashrc file. This command will let you export the path to FastQC, and
+#execute it everywhere
+#nano ~/.bashrc
+#export PATH='path/to/FastQC/':$PATH
+## For example:
+#export PATH='/home/duydao/dnaseq_work/tools/FastQC':$PATH
+#source ~/.bashrc
+## Try it by running
+#fastqc
+
+#Download Trimmomatic
+wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.39.zip
+unzip Trimmomatic-0.39.zip
+
+
+#download STAR
+# Get latest STAR source from releases
+wget https://github.com/alexdobin/STAR/archive/2.7.10b.tar.gz
+tar -xzf 2.7.10b.tar.gz
+cd STAR-2.7.10b
+
+# Compile
+cd source
+make STAR
+
+# Export path to STAR
+#nano ~/.bashrc
+#export PATH='path/to/tools/STAR-2.7.10b/bin/Linux_x86_64/':$PATH
+
+#Download subRead, featureCount
+git clone https://github.com/ShiLab-Bioinformatics/subread.git
+
+cd subread/src
+make -f Makefile.Linux
+
+#nano ~/.bashrc
+#export PATH='path/to/tools/subread/bin':$PATH
+
+
+#Download RSeQC
+#manually download at https://rseqc.sourceforge.net/#download-rseqc
+#version RSeQC (v5.0.1)
+# --> the link is https://sourceforge.net/projects/rseqc/files/RSeQC-5.0.1.tar.gz/download
+
+#Download Picard
+git clone https://github.com/broadinstitute/picard.git
+cd picard/
+./gradlew shadowJar
+
+
+
